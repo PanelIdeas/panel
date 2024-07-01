@@ -4,8 +4,10 @@ import clsx from 'clsx';
 // FIXME: replace with radix tooltip
 // import Tooltip from '@/components/elements/tooltip/Tooltip';
 import { formatDistanceToNowStrict } from 'date-fns';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Avatar from '@/components/Avatar';
 import ActivityLogMetaButton from '@/components/elements/activity/ActivityLogMetaButton';
 
 import useLocationHash from '@/plugins/useLocationHash';
@@ -46,10 +48,14 @@ export default ({ activity, children }: Props) => {
     // const properties = wrapProperties(activity.properties);
 
     return (
-        <div className={'grid grid-cols-10 py-4 border-b-2 border-zinc-800 last:rounded-b last:border-0 group'}>
+        <div
+            className={
+                'grid grid-cols-10 py-4 rounded-lg group bg-[#ffffff08] border-[#ffffff07] border-[1px] shadow-md'
+            }
+        >
             <div className={'hidden sm:flex sm:col-span-1 items-center justify-center select-none'}>
                 <div className={'flex items-center w-10 h-10 rounded-full bg-zinc-600 overflow-hidden'}>
-                    {/* <Avatar name={actor?.uuid || 'system'} /> */}
+                    <Avatar name={actor?.uuid || 'system'} />
                 </div>
             </div>
             <div className={'col-span-10 sm:col-span-9 flex'}>
@@ -67,10 +73,8 @@ export default ({ activity, children }: Props) => {
                         </Link>
                         <div className={clsx(style.icons, 'group-hover:text-zinc-300')}>
                             {activity.isApi && (
-                                // <Tooltip placement={'top'} content={'Using API Key'}>
                                 // <TerminalIcon />
                                 <div>terminal icon</div>
-                                // </Tooltip>
                             )}
                             {activity.event.startsWith('server:sftp.') && (
                                 // <Tooltip placement={'top'} content={'Using SFTP'}>
@@ -85,6 +89,11 @@ export default ({ activity, children }: Props) => {
                     {/* <p className={style.description}>
                         <Translate ns={'activity'} values={properties} i18nKey={activity.event.replace(':', '.')} />
                     </p> */}
+                    <p className={style.description}>
+                        {activity.description}
+                        {activity.event}
+                        {activity.batch}
+                    </p>
                     <div className={'mt-1 flex items-center text-sm'}>
                         {activity.ip && (
                             <span>
