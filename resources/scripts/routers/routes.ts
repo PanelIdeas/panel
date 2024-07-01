@@ -159,18 +159,18 @@ export default {
             component: SettingsContainer,
         },
         {
-            route: 'shell/*',
-            path: 'shell',
-            permission: 'startup.software',
-            name: 'Software',
-            component: ShellContainer,
-        },
-        {
             route: 'activity/*',
             path: 'activity',
             permission: 'activity.*',
             name: 'Activity',
             component: ServerActivityLogContainer,
+        },
+        {
+            route: 'shell/*',
+            path: 'shell',
+            permission: 'startup.software',
+            name: 'Software',
+            component: ShellContainer,
         },
     ],
 } as Routes;
