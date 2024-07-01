@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import FlashMessageRender from '@/components/FlashMessageRender';
+import { MainPageHeader } from '@/components/elements/MainPageHeader';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import Spinner from '@/components/elements/Spinner';
 import ActivityLogEntry from '@/components/elements/activity/ActivityLogEntry';
 import { styles as btnStyles } from '@/components/elements/button/index';
+import HugeIconX from '@/components/elements/hugeicons/X';
 import PaginationFooter from '@/components/elements/table/PaginationFooter';
 
 import { ActivityLogFilters } from '@/api/account/activity';
@@ -36,6 +38,7 @@ export default () => {
 
     return (
         <ServerContentBlock title={'Activity Log'}>
+            <MainPageHeader title={'Activity'}></MainPageHeader>
             <FlashMessageRender byKey={'server:activity'} />
             {(filters.filters?.event || filters.filters?.ip) && (
                 <div className={'flex justify-end mb-2'}>
@@ -44,7 +47,7 @@ export default () => {
                         className={clsx(btnStyles.button, btnStyles.text, 'w-full sm:w-auto')}
                         onClick={() => setFilters((value) => ({ ...value, filters: {} }))}
                     >
-                        Clear Filters
+                        Clear Filters <HugeIconX className={'w-3 h-3 ml-2'} fill='currentColor' />
                         {/* FIXME: X icon */}
                     </Link>
                 </div>
@@ -54,9 +57,12 @@ export default () => {
             ) : !data?.items.length ? (
                 <p className={'text-sm text-center text-zinc-400'}>No activity logs available for this server.</p>
             ) : (
-                <div className={'bg-zinc-700'}>
+                <div>
                     {data?.items.map((activity) => (
-                        <ActivityLogEntry key={activity.id} activity={activity}>
+                        <ActivityLogEntry
+                            key={activity.id}
+                            activity={activity}
+                        >
                             <span />
                         </ActivityLogEntry>
                     ))}
