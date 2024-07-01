@@ -7,8 +7,6 @@ import { MainPageHeader } from '@/components/elements/MainPageHeader';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import Spinner from '@/components/elements/Spinner';
 import ActivityLogEntry from '@/components/elements/activity/ActivityLogEntry';
-import { styles as btnStyles } from '@/components/elements/button/index';
-import HugeIconX from '@/components/elements/hugeicons/X';
 import PaginationFooter from '@/components/elements/table/PaginationFooter';
 
 import { ActivityLogFilters } from '@/api/account/activity';
@@ -44,11 +42,14 @@ export default () => {
                 <div className={'flex justify-end mb-2'}>
                     <Link
                         to={'#'}
-                        className={clsx(btnStyles.button, btnStyles.text, 'w-full sm:w-auto')}
+                        style={{
+                            background:
+                                'radial-gradient(124.75% 124.75% at 50.01% -10.55%, rgb(36, 36, 36) 0%, rgb(20, 20, 20) 100%)',
+                        }}
+                        className='rounded-full border-[1px] border-[#ffffff12] px-8 py-3 text-sm font-bold shadow-md'
                         onClick={() => setFilters((value) => ({ ...value, filters: {} }))}
                     >
-                        Clear Filters <HugeIconX className={'w-3 h-3 ml-2'} fill='currentColor' />
-                        {/* FIXME: X icon */}
+                        Clear Filters
                     </Link>
                 </div>
             )}
@@ -59,10 +60,7 @@ export default () => {
             ) : (
                 <div>
                     {data?.items.map((activity) => (
-                        <ActivityLogEntry
-                            key={activity.id}
-                            activity={activity}
-                        >
+                        <ActivityLogEntry key={activity.id} activity={activity}>
                             <span />
                         </ActivityLogEntry>
                     ))}
