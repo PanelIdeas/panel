@@ -5,7 +5,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountOverviewContainer from '@/components/dashboard/AccountOverviewContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
-import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import ServerActivityLogContainer from '@/components/server/activity/ServerActivityLogContainer';
 import BackupContainer from '@/components/server/backups/BackupContainer';
 import ServerConsole from '@/components/server/console/ServerConsoleContainer';
 import DatabasesContainer from '@/components/server/databases/DatabasesContainer';
