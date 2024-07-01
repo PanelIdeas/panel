@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 
 import { Button } from '@/components/elements/button/index';
+import HugeIconsChevronDoubleLeft from '@/components/elements/hugeicons/ChevronDoubleLeft';
+import HugeIconsChevronDoubleRight from '@/components/elements/hugeicons/ChevronDoubleRight';
 
 import { PaginationDataSet } from '@/api/http';
 
@@ -27,7 +29,6 @@ const PaginationFooter = ({ pagination, className, onPageSelect }: Props) => {
             pages.next.push(current + i);
         }
     }
-
     if (pagination.total === 0) {
         return null;
     }
@@ -52,7 +53,7 @@ const PaginationFooter = ({ pagination, className, onPageSelect }: Props) => {
                 <div className={'flex space-x-1'}>
                     <Button.Text {...buttonProps(1)} disabled={pages.previous.length !== 2}>
                         {/* <ChevronDoubleLeftIcon className={'w-3 h-3'} /> */}
-                        FIXME: Back
+                        <HugeIconsChevronDoubleLeft fill='currentColor' />
                     </Button.Text>
                     {pages.previous.reverse().map((value) => (
                         <Button.Text key={`previous-${value}`} {...buttonProps(value)}>
@@ -69,7 +70,7 @@ const PaginationFooter = ({ pagination, className, onPageSelect }: Props) => {
                     ))}
                     <Button.Text {...buttonProps(total)} disabled={pages.next.length !== 2}>
                         {/* <ChevronDoubleRightIcon className={'w-3 h-3'} /> */}
-                        FIXME: Forwards
+                        <HugeIconsChevronDoubleRight fill='currentColor' />
                     </Button.Text>
                 </div>
             )}
