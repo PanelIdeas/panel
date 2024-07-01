@@ -4,7 +4,7 @@
 
 .panel {
     @apply relative border-[1px] border-[#ffffff07] rounded-2xl max-w-xl w-full mx-auto text-left shadow-2xl backdrop-blur-3xl;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), rgba(255, 255, 255, 0.12);
+    background: linear-gradient(0deg, rgb(16, 16, 16), rgb(16, 16, 16)), rgb(255, 255, 255);
 }
 
 .title {
@@ -12,7 +12,7 @@
 }
 
 .close_icon {
-    @apply w-5 h-5 group-hover:rotate-90 transition-transform duration-100;
+    @apply w-5 h-5 group-hover:rotate-90 transition-transform duration-100 bg-[#ffffff08];
 }
 
 .dialog_icon {
