@@ -1,18 +1,16 @@
 import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 
+import UptimeDuration from '@/components/server/UptimeDuration';
 import StatBlock from '@/components/server/console/StatBlock';
 import { SocketEvent, SocketRequest } from '@/components/server/events';
 
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
-
 import { capitalize } from '@/lib/strings';
 
 import { ServerContext } from '@/state/server';
 
 import useWebsocketEvent from '@/plugins/useWebsocketEvent';
-
-import UptimeDuration from '@/components/server/UptimeDuration';
 
 type Stats = Record<'memory' | 'cpu' | 'disk' | 'uptime' | 'rx' | 'tx', number>;
 
@@ -32,7 +30,12 @@ type Stats = Record<'memory' | 'cpu' | 'disk' | 'uptime' | 'rx' | 'tx', number>;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Limit = ({ limit, children }: { limit: string | null; children: React.ReactNode }) => <>{children}</>;
+const Limit = ({ limit, children }: { limit: string | null; children: React.ReactNode }) => (
+    <>
+        {children}
+        <span className={'ml-1 text-gray-300 text-[70%] select-none'}>/ {limit || <>&infin;</>}</span>
+    </>
+);
 
 const ServerDetailsBlock = ({ className }: { className?: string }) => {
     const [stats, setStats] = useState<Stats>({ memory: 0, cpu: 0, disk: 0, uptime: 0, tx: 0, rx: 0 });
@@ -50,12 +53,6 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
         }),
         [limits],
     );
-
-    const allocation = ServerContext.useStoreState((state) => {
-        const match = state.server.data!.allocations.find((allocation) => allocation.isDefault);
-
-        return !match ? 'n/a' : `${match.alias || ip(match.ip)}:${match.port}`;
-    });
 
     useEffect(() => {
         if (!connected || !instance) {
@@ -84,21 +81,7 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
     });
 
     return (
-        <div className={clsx('flex md:flex-row gap-4 flex-col', className)}>
-            <div
-                className='transform-gpu skeleton-anim-2'
-                style={{
-                    display: 'flex',
-                    width: '100%',
-                    animationDelay: `150ms`,
-                    animationTimingFunction:
-                        'linear(0,0.01,0.04 1.6%,0.161 3.3%,0.816 9.4%,1.046,1.189 14.4%,1.231,1.254 17%,1.259,1.257 18.6%,1.236,1.194 22.3%,1.057 27%,0.999 29.4%,0.955 32.1%,0.942,0.935 34.9%,0.933,0.939 38.4%,1 47.3%,1.011,1.017 52.6%,1.016 56.4%,1 65.2%,0.996 70.2%,1.001 87.2%,1)',
-                }}
-            >
-                <StatBlock title={'IP Address'} copyOnClick={allocation}>
-                    {allocation}
-                </StatBlock>
-            </div>
+        <div className={clsx('flex md:flex-col gap-4 flex-col', className)} style={{ width: '122%' }}>
             <div
                 className='transform-gpu skeleton-anim-2'
                 style={{
@@ -188,7 +171,13 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                 }}
             >
                 <StatBlock title={'Uptime'}>
-                    {status === null ? ('Offline') : stats.uptime > 0 ? (<UptimeDuration uptime={stats.uptime / 1000} />) : (capitalize(status))}
+                    {status === null ? (
+                        'Offline'
+                    ) : stats.uptime > 0 ? (
+                        <UptimeDuration uptime={stats.uptime / 1000} />
+                    ) : (
+                        capitalize(status)
+                    )}
                 </StatBlock>
             </div>
         </div>
