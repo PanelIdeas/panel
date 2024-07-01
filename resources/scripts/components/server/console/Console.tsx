@@ -65,9 +65,10 @@ export default () => {
     const [history, setHistory] = usePersistedState<string[]>(`${serverId}:command_history`, []);
     const [historyIndex, setHistoryIndex] = useState(-1);
 
-    const handleConsoleOutput = (line: string, prelude = false) =>
+    const handleConsoleOutput = (line: string, prelude = false) => {
+        fitAddon.fit();
         terminal.writeln((prelude ? TERMINAL_PRELUDE : '') + line.replace(/(?:\r\n|\r|\n)$/im, '') + '\u001b[0m');
-
+    };
     const handleTransferStatus = (status: string) => {
         switch (status) {
             // Sent by either the source or target node if a failure occurs.
@@ -139,6 +140,7 @@ export default () => {
                 return true;
             });
         }
+        fitAddon.fit();
     }, [terminal, connected]);
 
     useEventListener(
@@ -178,6 +180,8 @@ export default () => {
             instance.send(SocketRequest.SEND_LOGS);
         }
 
+        fitAddon.fit();
+
         return () => {
             if (instance) {
                 Object.keys(listeners).forEach((key: string) => {
@@ -206,7 +210,10 @@ export default () => {
         >
             <div className={clsx(styles.terminal, 'relative')}>
                 <SpinnerOverlay visible={!connected} size={'large'} />
-                <div className={clsx(styles.container, styles.overflows_container, { 'rounded-b': !canSendCommands })}>
+                <div
+                    className={clsx(styles.container, styles.overflows_container, { 'rounded-b': !canSendCommands })}
+                    style={{ width: '100%' }}
+                >
                     <div className={'h-full'}>
                         <div id={styles.terminal} ref={ref} />
                     </div>
