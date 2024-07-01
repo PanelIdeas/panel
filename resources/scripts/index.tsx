@@ -6,6 +6,8 @@ import { render } from 'react-dom';
 
 import App from '@/components/App';
 
+import './i18n';
+
 Sentry.init({
     // This is safe to be public.
     // See https://docs.sentry.io/product/sentry-basics/concepts/dsn-explainer/ for more information.
