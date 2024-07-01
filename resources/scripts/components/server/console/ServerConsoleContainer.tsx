@@ -9,6 +9,7 @@ import Spinner from '@/components/elements/Spinner';
 import { Alert } from '@/components/elements/alert';
 import Console from '@/components/server/console/Console';
 import PowerButtons from '@/components/server/console/PowerButtons';
+import ServerAllocation from '@/components/server/console/ServerAllocation';
 import ServerDetailsBlock from '@/components/server/console/ServerDetailsBlock';
 import StatGraphs from '@/components/server/console/StatGraphs';
 
@@ -48,9 +49,21 @@ const ServerConsoleContainer = () => {
                         <span className='opacity-50'>{description}</span>
                     </h2>
                 )}
-                <ServerDetailsBlock />
-                <Console />
-                <div className={'grid grid-cols-1 md:grid-cols-3 gap-4'}>
+                <ServerAllocation />
+                <div
+                    className={'grid grid-cols-4 gap-2 sm:gap-4 mb-4'}
+                    style={{
+                        width: '95%',
+                    }}
+                >
+                    <div className={'flex col-span-4 lg:col-span-3'}>
+                        <Spinner.Suspense>
+                            <Console />
+                        </Spinner.Suspense>
+                    </div>
+                    <ServerDetailsBlock className={'col-span-4 lg:col-span-1 order-last lg:order-none'} />
+                </div>
+                <div className={'grid grid-cols-1 md:grid-cols-3 gap-4'} style={{marginTop: '-1%'}}>
                     <Spinner.Suspense>
                         <StatGraphs />
                     </Spinner.Suspense>
