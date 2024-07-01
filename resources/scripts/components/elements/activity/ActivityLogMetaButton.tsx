@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/elements/button/index';
 // FIXME: add icons back
 import { Dialog } from '@/components/elements/dialog';
+import HugeIconsClipboard from '@/components/elements/hugeicons/Clipboard';
 
 export default ({ meta }: { meta: Record<string, unknown> }) => {
     const [open, setOpen] = useState(false);
@@ -28,7 +29,7 @@ export default ({ meta }: { meta: Record<string, unknown> }) => {
                 }
                 onClick={() => setOpen(true)}
             >
-                FIXME: Clipboard Icon
+                <HugeIconsClipboard fill='currentColor' />
                 {/* <ClipboardListIcon className={'w-5 h-5'} /> */}
             </button>
         </div>
