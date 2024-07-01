@@ -7,9 +7,9 @@
 }
 
 .description {
-    @apply mt-1 text-sm break-words  pr-4;
+    @apply mt-1 text-sm break-words pr-4;
 
     & strong {
-        @apply text-zinc-50 font-semibold break-all;
+        @apply text-zinc-50 font-extrabold break-all;
     }
 }
