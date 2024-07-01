@@ -8,7 +8,7 @@
     }
 
     & > .icon {
-        @apply hidden flex-shrink-0 items-center justify-center rounded-lg shadow-md w-12 h-12;
+        @apply hidden flex-shrink-0 items-center justify-center rounded-lg shadow-md w-8 h-8;
         @apply transition-colors duration-500;
         @apply sm:flex sm:mr-4;
 
