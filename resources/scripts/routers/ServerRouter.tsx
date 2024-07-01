@@ -19,6 +19,7 @@ import PermissionRoute from '@/components/elements/PermissionRoute';
 import Logo from '@/components/elements/PyroLogo';
 import { NotFound, ServerError } from '@/components/elements/ScreenBlock';
 import CommandMenu from '@/components/elements/commandk/CmdK';
+import HugeIconsActivityLog from '@/components/elements/hugeicons/ActivityLog';
 import HugeIconsClock from '@/components/elements/hugeicons/Clock';
 import HugeIconsCloudUp from '@/components/elements/hugeicons/CloudUp';
 import HugeIconsConnections from '@/components/elements/hugeicons/Connections';
@@ -140,6 +141,7 @@ export default () => {
     const NavigationStartup = useRef(null);
     const NavigationSchedules = useRef(null);
     const NavigationSettings = useRef(null);
+    const NavigationActivity = useRef(null);
     const NavigationShell = useRef(null);
 
     const calculateTop = (pathname: string) => {
@@ -155,6 +157,7 @@ export default () => {
         const ButtonStartup = NavigationStartup.current;
         const ButtonSchedules = NavigationSchedules.current;
         const ButtonSettings = NavigationSettings.current;
+        const ButtonActivity = NavigationActivity.current;
         const ButtonShell = NavigationShell.current;
 
         // Perfectly center the page highlighter with simple math.
@@ -183,6 +186,8 @@ export default () => {
             return (ButtonSchedules as any).offsetTop + HighlightOffset;
         if (pathname.endsWith(`/server/${id}/settings`) && ButtonSettings != null)
             return (ButtonSettings as any).offsetTop + HighlightOffset;
+        if (pathname.endsWith(`/server/${id}/activity`) && ButtonActivity != null)
+            return (ButtonActivity as any).offsetTop + HighlightOffset;
         if (pathname.endsWith(`/server/${id}/shell`) && ButtonShell != null)
             return (ButtonShell as any).offsetTop + HighlightOffset;
         return '0';
@@ -358,6 +363,16 @@ export default () => {
                                         >
                                             <HugeIconsDashboardSettings fill='currentColor' />
                                             <p>Settings</p>
+                                        </NavLink>
+                                    </Can>
+                                    <Can action={'activity.*'} matchAny>
+                                        <NavLink
+                                            className='flex flex-row items-center'
+                                            ref={NavigationActivity}
+                                            to={`/server/${id}/activity`}
+                                        >
+                                            <HugeIconsActivityLog fill='currentColor' />
+                                            <p>Activity</p>
                                         </NavLink>
                                     </Can>
                                 </>
