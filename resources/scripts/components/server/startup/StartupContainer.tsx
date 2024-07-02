@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import isEqual from 'react-fast-compare';
 
 import CopyOnClick from '@/components/elements/CopyOnClick';
@@ -88,7 +88,7 @@ const StartupContainer = () => {
                 clearAndAddHttpError({ key: 'startup:image', error });
             })
             .then(() => setLoading(false));
-    }
+    };
 
     return !data ? (
         !error || (error && isValidating) ? (
