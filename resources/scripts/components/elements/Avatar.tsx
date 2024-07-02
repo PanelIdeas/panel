@@ -1,5 +1,4 @@
 import BoringAvatar, { AvatarProps } from 'boring-avatars';
-import React from 'react';
 
 import { useStoreState } from '@/state/hooks';
 
